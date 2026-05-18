@@ -23,448 +23,94 @@
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <!-- Font preloading for performance -->
-    <link rel="preload" href="../fonts/Compadre-Extended.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/DegularText-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/Vulf_Mono-Light_Italic_web.woff2" as="font" type="font/woff2" crossorigin>
     <style>
-        /* CSS Variables for Brand Colors */
-        :root {
-            --color-primary: #9B4A34;     /* Muted terracotta / rust red */
-            --color-secondary: #4F6A89;   /* Washed-out denim blue */
-            --color-accent: #D8A34A;      /* Mustard yellow */
-            --color-paper: #F4F0E6;       /* Off-white paper */
-            --color-charcoal: #222222;    /* Charcoal black */
-        }
-        
-        /* Custom Font Declarations */
-        @font-face {
-            font-family: 'Degular Text';
-            src: url('../fonts/DegularText-Regular.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/DegularText-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Compadre Extended';
-            src: url('../fonts/Compadre-Extended.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Compadre-Extended.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Vulf Mono';
-            src: url('../fonts/Vulf_Mono-Light_Italic_web.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Vulf_Mono-Light_Italic_web.woff2') format('woff2');
-            font-weight: 300;
-            font-style: italic;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Coniferous';
-            src: url('../fonts/Coniferous-Regular.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Coniferous-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-        
-        html {
-            overflow-x: hidden;
-        }
-        
-        body {
-            font-family: 'Degular Text', Georgia, serif;
-            background-color: var(--color-charcoal);
-            color: var(--color-paper);
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-            line-height: 1.6;
-            font-size: 16px;
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-        }
-        
-        /* Subtle paper texture overlay for analog vibe */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.015) 1px, transparent 1px);
-            background-size: 4px 4px, 6px 6px;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        h1 {
-            font-family: 'Compadre Extended', Georgia, serif;
-            font-size: 3.5em;
-            margin: 20px 0 10px 0;
-            letter-spacing: 2px;
-            color: var(--color-paper);
-        }
-        
-        .subtitle {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.3em;
-            color: var(--color-secondary);
-            font-weight: normal;
-            letter-spacing: 1px;
-            margin: 0 0 40px 0;
-        }
-        
-        .intro {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.95em;
-            font-style: italic;
-            color: var(--color-accent);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-        }
-        
-        /* Review Cards */
-        .reviews-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin: 40px auto;
-            max-width: 800px;
-        }
-        
-        .review-card {
-            background: rgba(79, 106, 137, 0.1);
-            border: 2px solid var(--color-secondary);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: left;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .review-card:hover {
-            border-color: var(--color-accent);
-            box-shadow: 0 4px 20px rgba(216, 163, 74, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .review-source {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.4em;
-            color: var(--color-accent);
-            font-weight: bold;
-            margin: 0 0 8px 0;
-            letter-spacing: 0.5px;
-        }
-        
-        .review-meta {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.85em;
-            font-style: italic;
-            color: var(--color-secondary);
-            margin: 0 0 20px 0;
-        }
-        
-        .review-quote {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.05em;
-            line-height: 1.8;
-            color: var(--color-paper);
-            margin: 0 0 20px 0;
-            padding-left: 20px;
-            border-left: 3px solid var(--color-primary);
-            font-style: normal;
-        }
-        
-        .review-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background-color: var(--color-primary);
-            color: var(--color-paper);
-            text-decoration: none;
-            border-radius: 8px;
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1em;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-        
-        .review-link:hover {
-            background-color: var(--color-accent);
-            color: var(--color-charcoal);
-            transform: translateX(4px);
-        }
-        
-        .review-link:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        .review-link svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-        
-        /* Inline song links within quotes and meta */
-        .review-quote a,
-        .review-meta a {
-            color: var(--color-accent);
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
-            transition: color 0.2s ease;
-        }
-        
-        .review-quote a:hover,
-        .review-meta a:hover {
-            color: var(--color-primary);
-        }
-        
-        .review-quote a:focus-visible,
-        .review-meta a:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-            border-radius: 2px;
-        }
-        
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 40px 0 20px;
-            padding: 12px 20px;
-            background-color: var(--color-secondary);
-            color: var(--color-paper);
-            text-decoration: none;
-            border-radius: 8px;
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1em;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-        
-        .back-link:hover {
-            background-color: var(--color-accent);
-            color: var(--color-charcoal);
-        }
-        
-        .back-link:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        .back-link svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-        
-        .footer {
-            margin-top: 60px;
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 14px;
-            font-weight: 300;
-            font-style: italic;
-            color: var(--color-accent);
-            border-top: 1px solid var(--color-secondary);
-            padding-top: 20px;
-        }
-        
-        .divider {
-            height: 1px;
-            background-color: var(--color-secondary);
-            margin: 40px auto;
-            border-radius: 1px;
-            max-width: 400px;
-        }
-        
-        /* Mobile-First Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2.5em;
-                letter-spacing: 1px;
-            }
-            
-            .subtitle {
-                font-size: 1.2em;
-            }
-            
-            .intro {
-                font-size: 0.9em;
-            }
-            
-            .review-card {
-                padding: 20px;
-            }
-            
-            .review-source {
-                font-size: 1.2em;
-            }
-            
-            .review-quote {
-                font-size: 1em;
-                padding-left: 15px;
-            }
-        }
-        
+        @font-face { font-family: 'Compadre'; src: url('https://cdn.iamdavehawkins.com/Compadre-Extended.woff2') format('woff2'); }
+        @font-face { font-family: 'Vulf Mono'; src: url('https://cdn.iamdavehawkins.com/Vulf_Mono-Light_Italic_web.woff2') format('woff2'); font-style: italic; }
+        body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; max-width: 600px; margin: 0 auto; padding: 10px 10px 40px 10px; background: #F4F0E6; color: #222; }
+        a { color: #9B4A34; }
+        a:visited { color: #7a3a28; }
+        h1 { font-family: 'Compadre', Georgia, serif; font-size: 22px; margin: 10px 0 3px 0; color: #9B4A34; letter-spacing: 1px; }
+        h2 { font-size: 13px; font-weight: normal; color: #4F6A89; margin: 0 0 10px 0; }
+        hr { border: none; border-top: 1px solid #4F6A89; margin: 15px 0; }
+        .intro { font-family: 'Vulf Mono', monospace; font-size: 12px; color: #666; font-style: italic; margin: 0 0 15px 0; }
+        .review { margin: 0 0 20px 0; padding: 12px; background: #fff; border: 1px solid #4F6A89; display: flex; gap: 12px; }
+        .review-art { width: 60px; height: 60px; object-fit: cover; border: 1px solid #ccc; flex-shrink: 0; }
+        .review-content { flex: 1; }
+        .review-source { font-weight: bold; font-size: 13px; margin: 0 0 3px 0; color: #9B4A34; }
+        .review-meta { font-family: 'Vulf Mono', monospace; font-size: 10px; color: #4F6A89; font-style: italic; margin: 0 0 8px 0; }
+        .review-quote { font-size: 13px; line-height: 1.6; margin: 0 0 8px 0; padding-left: 10px; border-left: 3px solid #D8A34A; color: #333; }
+        .review-link { font-size: 11px; }
+        .footer { font-size: 10px; color: #666; margin-top: 15px; padding-bottom: 20px; }
+        html, body { height: auto; min-height: 100%; overflow-x: hidden; }
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 2em;
-                letter-spacing: 0.5px;
-            }
-            
-            .subtitle {
-                font-size: 1.1em;
-            }
-            
-            .intro {
-                font-size: 0.85em;
-            }
-            
-            .review-card {
-                padding: 18px;
-            }
-            
-            .review-quote {
-                font-size: 0.95em;
-                line-height: 1.7;
-            }
-            
-            .review-link {
-                font-size: 0.95em;
-                padding: 10px 18px;
-            }
+            .review { flex-direction: column; }
+            .review-art { width: 50px; height: 50px; }
         }
     </style>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="99efd3af-3c2e-490e-adc0-aa7a12c5f68a"></script>
 </head>
 <body>
-    <h1>NICE THINGS</h1>
-    <p class="subtitle">press & reviews</p>
+    <h1>nice things</h1>
+    <h2>press & reviews</h2>
     
-    <p class="intro">
-        some kind words from folks who've listened
-    </p>
+    <p class="intro">some kind words from folks who've listened</p>
     
-    <div class="reviews-container">
-        <!-- Review 1: Groove Art Universe - Half Alive EP Full Review -->
-        <article class="review-card">
-            <h2 class="review-source">Groove Art Universe</h2>
+    <hr>
+    
+    <div class="review">
+        <img src="https://iamdavehawkins.com/EP%20Images/Half%20Alive%20EP%20-%20Album%20Cover%201.png" alt="Half Alive EP" class="review-art">
+        <div class="review-content">
+            <p class="review-source">Groove Art Universe</p>
             <p class="review-meta">full review of <a href="https://links.iamdavehawkins.com" target="_blank" rel="noopener">Half Alive EP</a> · December 2025</p>
-            <blockquote class="review-quote">
-                He's got everything that should ever be required to build a massive audience - clarity of purpose, earnest charm, humor, self-awareness, humility, unbelievable skill, and a killer instinct for constructing set pieces that resonate with people.
-            </blockquote>
-            <a href="https://www.grooveartuniverse.com/davehawkinshalfalive" class="review-link" target="_blank" rel="noopener">
-                Read Full Review
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-            </a>
-        </article>
-        
-        <!-- Review 2: FM of Music & Entertainment - Flicker Review -->
-        <article class="review-card">
-            <h2 class="review-source">FM of Music & Entertainment</h2>
+            <p class="review-quote">He's got everything that should ever be required to build a massive audience - clarity of purpose, earnest charm, humor, self-awareness, humility, unbelievable skill, and a killer instinct for constructing set pieces that resonate with people.</p>
+            <a href="https://www.grooveartuniverse.com/davehawkinshalfalive" class="review-link" target="_blank" rel="noopener">read full review →</a>
+        </div>
+    </div>
+    
+    <div class="review">
+        <img src="https://iamdavehawkins.com/album%20art/Flicker%20-%20Album%20Cover.png" alt="Flicker" class="review-art">
+        <div class="review-content">
+            <p class="review-source">FM of Music & Entertainment</p>
             <p class="review-meta">review of "<a href="https://flicker.iamdavehawkins.com" target="_blank" rel="noopener">Flicker</a>" · December 2025</p>
-            <blockquote class="review-quote">
-                Dave Hawkins is an indie pop/alt rock singer-songwriter out of Denver, Colorado. His ability to bridge alt-pop synths and programming and indie rock elements really make him a special artist... Musically, I love this. Dave ROCKS the 3/4 tempo, as he plays it in a swing. It really has a lovely flow to it. The blend between the synths and guitars truly is special.
-            </blockquote>
-            <a href="https://fmofmusicentertainment.com/2025/12/11/222-fifteen-minutes-of-fame-spotlights-december-11th-edition/" class="review-link" target="_blank" rel="noopener">
-                Read Full Review
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-            </a>
-        </article>
-        
-        <!-- Review 3: Threads / Jack Jose -->
-        <article class="review-card">
-            <h2 class="review-source">Jack Jose</h2>
+            <p class="review-quote">Dave Hawkins is an indie pop/alt rock singer-songwriter out of Denver, Colorado. His ability to bridge alt-pop synths and programming and indie rock elements really make him a special artist... Musically, I love this. Dave ROCKS the 3/4 tempo, as he plays it in a swing. It really has a lovely flow to it.</p>
+            <a href="https://fmofmusicentertainment.com/2025/12/11/222-fifteen-minutes-of-fame-spotlights-december-11th-edition/" class="review-link" target="_blank" rel="noopener">read full review →</a>
+        </div>
+    </div>
+    
+    <div class="review">
+        <img src="https://iamdavehawkins.com/EP%20Images/Half%20Alive%20EP%20-%20Album%20Cover%201.png" alt="Half Alive EP" class="review-art">
+        <div class="review-content">
+            <p class="review-source">Jack Jose</p>
             <p class="review-meta">review of <a href="https://links.iamdavehawkins.com" target="_blank" rel="noopener">Half Alive EP</a> · Threads · December 2025</p>
-            <blockquote class="review-quote">
-                Sometimes we hear or read something and are blown away. We think, "How did they do THAT?"... That's me listening to <a href="https://links.iamdavehawkins.com" target="_blank" rel="noopener">Half Alive</a>. It's fully alive. It's always moving, shimmering. You must keep listening... His lyrics feel somehow inevitable, and yet unpredictable, odd images you couldn't think about changing.
-            </blockquote>
-            <a href="https://www.threads.com/@jack.jose.5/post/DR-pypEDmEk?xmt=AQF0ev2URpcrkxgREyNTT034-PHabVNk0HhLwSWzPgkwLw" class="review-link" target="_blank" rel="noopener">
-                Read Full Review
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-            </a>
-        </article>
-        
-        <!-- Review 4: FM of Music & Entertainment -->
-        <article class="review-card">
-            <h2 class="review-source">FM of Music & Entertainment</h2>
+            <p class="review-quote">Sometimes we hear or read something and are blown away. We think, "How did they do THAT?"... That's me listening to Half Alive. It's fully alive. It's always moving, shimmering. You must keep listening... His lyrics feel somehow inevitable, and yet unpredictable.</p>
+            <a href="https://www.threads.com/@jack.jose.5/post/DR-pypEDmEk?xmt=AQF0ev2URpcrkxgREyNTT034-PHabVNk0HhLwSWzPgkwLw" class="review-link" target="_blank" rel="noopener">read full review →</a>
+        </div>
+    </div>
+    
+    <div class="review">
+        <img src="https://iamdavehawkins.com/album%20art/With%20Love%20-%20Album%20Cover.png" alt="With Love" class="review-art">
+        <div class="review-content">
+            <p class="review-source">FM of Music & Entertainment</p>
             <p class="review-meta">review of "<a href="https://withlove.iamdavehawkins.com" target="_blank" rel="noopener">With Love</a>" · October 2025</p>
-            <blockquote class="review-quote">
-                Blending the raw performance of Dashboard Confessional with the introspective production of Bon Iver's more experimental work, Hawkins has founded a sound that can certainly earn the coveted description of being "unique"... David Hawkins has very catchy music that is easy to listen to. It is the type of music that can be played on a loop all day and would continue to entertain.
-            </blockquote>
-            <a href="https://fmofmusicentertainment.com/2025/10/24/199-fifteen-minutes-of-fame-spotlights-october-24th/" class="review-link" target="_blank" rel="noopener">
-                Read Full Review
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-            </a>
-        </article>
-        
-        <!-- Review 5: Groove Art Universe -->
-        <article class="review-card">
-            <h2 class="review-source">Groove Art Universe</h2>
+            <p class="review-quote">Blending the raw performance of Dashboard Confessional with the introspective production of Bon Iver's more experimental work, Hawkins has founded a sound that can certainly earn the coveted description of being "unique"... very catchy music that is easy to listen to.</p>
+            <a href="https://fmofmusicentertainment.com/2025/10/24/199-fifteen-minutes-of-fame-spotlights-october-24th/" class="review-link" target="_blank" rel="noopener">read full review →</a>
+        </div>
+    </div>
+    
+    <div class="review">
+        <img src="https://iamdavehawkins.com/album%20art/Wool%20%26%20Fur%20-%20Album%20Cover.png" alt="Wool & Fur" class="review-art">
+        <div class="review-content">
+            <p class="review-source">Groove Art Universe</p>
             <p class="review-meta">review of "<a href="https://woolandfur.iamdavehawkins.com" target="_blank" rel="noopener">Wool & Fur</a>" · 2025</p>
-            <blockquote class="review-quote">
-                Dave Hawkins' catalog contains a diversity unrivaled by all but the most deliberately unhinged of artists, but it all sounds like Hawkins - earnest lyrics, rich arrangements and deceptively skillful composition, with a warmth and humanity that lets you know you're in good hands... The cumulative effect of it all feels like some sort of a spell is being cast.
-            </blockquote>
-            <a href="https://www.grooveartuniverse.com/davehawkins" class="review-link" target="_blank" rel="noopener">
-                Read Full Review
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-            </a>
-        </article>
+            <p class="review-quote">Dave Hawkins' catalog contains a diversity unrivaled by all but the most deliberately unhinged of artists, but it all sounds like Hawkins - earnest lyrics, rich arrangements and deceptively skillful composition, with a warmth and humanity that lets you know you're in good hands.</p>
+            <a href="https://www.grooveartuniverse.com/davehawkins" class="review-link" target="_blank" rel="noopener">read full review →</a>
+        </div>
     </div>
     
-    <div class="divider"></div>
+    <hr>
     
-    <a href="https://links.iamdavehawkins.com" class="back-link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M19 12H6m0 0 5 5m-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-        Back to Links
-    </a>
+    <p class="footer"><a href="https://links.iamdavehawkins.com">← back to links</a> · Dave Hawkins</p>
     
-    <div class="footer">
-        <p>© <script>document.write(new Date().getFullYear());</script> Dave Hawkins</p>
-    </div>
+    <div style="height: 100px;"></div>
 </body>
 </html>
